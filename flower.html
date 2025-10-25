@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="images/gift.png" type="image/x-icon">
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- Document Title -->
   <title>FLOWERS</title>
 </head>
 
@@ -316,9 +314,66 @@
 
   <!-- Title -->
   <h1 class="title"><span id="title"></span></h1>
+
+  <!-- Audio Element -->
+  <audio id="backgroundMusic" loop>
+    <source src="audio/romantic-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // MUSIK DAN ANIMASI LANGSUNG JALAN
+    document.addEventListener('DOMContentLoaded', function() {
+      const backgroundMusic = document.getElementById('backgroundMusic');
+      const titleElement = document.getElementById('title');
+      const body = document.body;
+
+      // 1. MULAI ANIMASI BUNGA
+      body.classList.remove("not-loaded");
+
+      // 2. PUTAR MUSIK
+      if (backgroundMusic) {
+        backgroundMusic.volume = 0.5;
+        backgroundMusic.play().catch(error => {
+          console.log('Klik untuk memutar musik');
+        });
+      }
+      
+      // 3. ANIMASI TEKS
+      if (titleElement) {
+        titleElement.innerHTML = '';
+        const initialText = 'I HAVE SOMETHING...';
+        const letters = initialText.split('');
+        let index = 0;
+
+        function typeInitialText() {
+          if (index < letters.length) {
+            titleElement.innerHTML += letters[index];
+            index++;
+            setTimeout(typeInitialText, 100);
+          } else {
+            setTimeout(showLoveText, 1500);
+          }
+        }
+        
+        function showLoveText() {
+          titleElement.innerHTML = '';
+          const loveText = 'I LOVE U';
+          const letters = loveText.split('');
+          let index = 0;
+
+          function typeLoveText() {
+            if (index < letters.length) {
+              titleElement.innerHTML += letters[index];
+              index++;
+              setTimeout(typeLoveText, 300);
+            }
+          }
+          typeLoveText();
+        }
+
+        typeInitialText();
+      }
+    });
+  </script>
 </body>
-
 </html>
-
-<!-- Import Javascript -->
-<script src="js/main.js"></script>
